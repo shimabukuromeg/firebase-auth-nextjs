@@ -33,3 +33,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.env
+social-login-40cc1-firebase-adminsdk-wfgvg-5a3e056a69.json
+firebaseSecretKey.json
