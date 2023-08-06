@@ -13,7 +13,7 @@ export const ClientComponent = () => {
         <div>
             <button onClick={() => {
                 signOutNextauth({
-                    callbackUrl: "/signin"
+                    callbackUrl: "/"
                 }).then(() => {
                     // Sign-out successful.
                     signOut(auth).then(() => {
