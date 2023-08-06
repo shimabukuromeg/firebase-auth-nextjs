@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions = {
                 httpOnly: true,
                 sameSite: "lax",
                 path: "/",
-                domain: "app.shimabukuromeg.dev",
+                domain: "shimabukuromeg.dev",
             },
         },
     },
