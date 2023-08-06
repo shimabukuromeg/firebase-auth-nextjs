@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
         strategy: "jwt",
         // maxAge: 60 * 60 * 24 * 360, // 1 year
     },
-    cookies: {
+    cookies: process.env.NODE_ENV === 'production' ? {
         sessionToken: {
             name: `__Secure-next-auth.session-token`,
             options: {
@@ -39,7 +39,7 @@ export const authOptions: NextAuthOptions = {
                 secure: "shimabukuromeg.dev",
             },
         },
-    },
+    } : {},
     callbacks: {
         // NOTE: session { strategy: jwt } の場合は　token にしか値はっていないっぽい。(JWTをシリアライズした値)
         async jwt({ token, user }: { token: JWT; user: User }) {
