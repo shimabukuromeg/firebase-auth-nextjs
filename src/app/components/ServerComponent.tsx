@@ -18,7 +18,13 @@ const ServerComponent = async () => {
         );
     }
 
-    return <p>{JSON.stringify(user)}</p>;
+    return (<>
+        <h2> Session info</h2 >
+        <p>{JSON.stringify(session)}</p>
+        <hr />
+        <h2> User info</h2 >
+        <p>uid: {JSON.stringify(user.uid)}</p>
+    </>);
 };
 
 export default ServerComponent;
