@@ -26,8 +26,10 @@ export const authOptions: NextAuthOptions = {
     ],
     session: {
         strategy: "jwt",
+        // maxAge: 60 * 60 * 24 * 360, // 1 year
     },
     callbacks: {
+        // NOTE: session { strategy: jwt } の場合は　token にしか値はっていないっぽい。(JWTをシリアライズした値)
         async jwt({ token, user }: { token: JWT; user: User }) {
             return { ...token, ...user };
         },
@@ -35,7 +37,15 @@ export const authOptions: NextAuthOptions = {
         async session({ session, token }) {
             session.user.emailVerified = token.emailVerified;
             session.user.uid = token.uid;
-            return session;
+
+            return {
+                ...session,
+                user: {
+                    ...session.user,
+                    emailVerified: token.emailVerified,
+                    uid: token.uid,
+                }
+            }
         },
     },
 };
