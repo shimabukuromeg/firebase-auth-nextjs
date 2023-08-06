@@ -28,17 +28,18 @@ export const authOptions: NextAuthOptions = {
         strategy: "jwt",
         // maxAge: 60 * 60 * 24 * 360, // 1 year
     },
-    // cookies: {
-    //     sessionToken: {
-    //         name: `__Secure-next-auth.session-token`,
-    //         options: {
-    //             httpOnly: true,
-    //             sameSite: "lax",
-    //             path: "/",
-    //             domain: "shimabukuromeg.dev",
-    //         },
-    //     },
-    // },
+    cookies: {
+        sessionToken: {
+            name: `__Secure-next-auth.session-token`,
+            options: {
+                httpOnly: true,
+                sameSite: "lax",
+                path: "/",
+                domain: "shimabukuromeg.dev",
+                secure: "shimabukuromeg.dev",
+            },
+        },
+    },
     callbacks: {
         // NOTE: session { strategy: jwt } の場合は　token にしか値はっていないっぽい。(JWTをシリアライズした値)
         async jwt({ token, user }: { token: JWT; user: User }) {
