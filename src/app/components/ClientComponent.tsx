@@ -1,10 +1,9 @@
 "use client";
 
-import { User, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { auth } from "@/firebase/client";
-import { useEffect, useState } from "react";
 import { useAuthContext } from "@/provider/FirebaseAuthProvider";
-import { signOut as signOutNextauth, useSession } from "next-auth/react";
+import { signOut as signOutNextauth } from "next-auth/react";
 
 
 export const ClientComponent = () => {
