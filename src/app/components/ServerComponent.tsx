@@ -22,6 +22,5 @@ export const ServerComponent = async () => {
     return (<>
         <h3>next auth session info</h3 >
         <p>{JSON.stringify(session)}</p>
-        <p>uid: {JSON.stringify(user.uid)}</p>
     </>);
 };

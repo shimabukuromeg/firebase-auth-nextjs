@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
                     try {
                         const decoded = await auth.verifyIdToken(idToken);
 
-                        return { ...decoded } as any as User;
+                        return { ...decoded, idToken } as any as User & { idToken: string };
                     } catch (err) {
                         console.error(err);
                     }
@@ -42,13 +42,20 @@ export const authOptions: NextAuthOptions = {
     } : {},
     callbacks: {
         // NOTE: session { strategy: jwt } の場合は　token にしか値はっていないっぽい。(JWTをシリアライズした値)
+        // JWT トークンを生成・更新する際に呼び出されます
         async jwt({ token, user }: { token: JWT; user: User }) {
+            console.log('jwt: token => ', token);
+            console.log('jwt: user => ', user);
             return { ...token, ...user };
         },
-        // sessionにJWTトークンからのユーザ情報を格納
+        // NOTE: sessionにJWTトークンからのユーザ情報を格納
+        // セッションオブジェクトを生成・更新する際に呼び出されます。
         async session({ session, token }) {
             session.user.emailVerified = token.emailVerified;
             session.user.uid = token.uid;
+
+            console.log('session: session => ', session);
+            console.log('session: token => ', token);
 
             return {
                 ...session,
@@ -56,7 +63,8 @@ export const authOptions: NextAuthOptions = {
                     ...session.user,
                     emailVerified: token.emailVerified,
                     uid: token.uid,
-                }
+                },
+                idToken: token.idToken,
             }
         },
     },
